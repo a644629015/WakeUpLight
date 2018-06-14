@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#59B5EA</color>
+    <color name="colorPrimaryDark">#34C0F0</color>
+    <color name="colorAccent">#59B5EA</color>
+
+    <color name="primaryPress">#34383b</color>
+
+    <!--文字黑色-->
+    <color name="textBlack">#333333</color>
+    <color name="textBlackLess">#7f000000</color>
+    <!--文字灰色-->
+    <color name="textGray">#757575</color>
+    <!--按钮灰色-->
+    <color name="btn_gray">#E6E8E7</color>
+    <!--文字红色-->
+    <color name="textRed">#df212c</color>
+    <!--分割线灰色-->
+    <color name="dividerColor">#f7f7f7</color>
+    <color name="grayEe">#eeeeee</color>
+    <color name="grayCc">#CCCCCC</color>
+    <!--纯白-->
+    <color name="white">#FFFFFF</color>
+    <!--纯白按压-->
+    <color name="white_ec">#ECECEC</color>
+    <!--透明-->
+    <color name="transfer">#00000000</color>
+
+    <color name="bg_f4">#f4f4f4</color>
+
+</resources>
