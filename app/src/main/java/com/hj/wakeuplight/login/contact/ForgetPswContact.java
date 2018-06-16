@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import com.hjtech.base.base.BasePresenter;
 import com.hjtech.base.base.BaseView;
 
-public interface RegisterContact {
+public interface ForgetPswContact {
 
     interface View extends BaseView {
         String getName();
@@ -22,16 +22,15 @@ public interface RegisterContact {
         String getPassagain();
         String getCode();
         void countDown();
-        boolean isChecked();
         void showLlyt(int i);
         void registerSuccess();
     }
 
     interface Presenter extends BasePresenter {
-        void register();
+        void reset();
         void getCode();
-        void verfi();
-        public void chageEyes(ImageView image, EditText text);//验证验证码
+        void verfi();//验证验证码
+        void chageEyes(ImageView image, EditText text);
     }
 
 }

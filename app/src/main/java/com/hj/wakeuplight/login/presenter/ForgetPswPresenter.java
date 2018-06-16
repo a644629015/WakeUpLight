@@ -9,17 +9,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.hj.wakeuplight.R;
-import com.hj.wakeuplight.base.net.Net;
+import com.hj.wakeuplight.login.contact.ForgetPswContact;
 import com.hj.wakeuplight.login.contact.RegisterContact;
 import com.hjtech.base.app.MyApp;
 import com.hjtech.base.base.BasePresenterImpl;
-import com.hjtech.base.retroft.RetroftUtils;
-import com.hjtech.base.utils.RxSchedulers;
 import com.hjtech.base.utils.ToastUtils;
-
-import io.reactivex.functions.Consumer;
-
-import static android.content.ContentValues.TAG;
 
 /*
  * 项目名:    WakeUpLight
@@ -30,21 +24,15 @@ import static android.content.ContentValues.TAG;
  * 描述:     TODO
  */
 
-public class RegisterPresenter extends BasePresenterImpl<RegisterContact.View> implements RegisterContact.Presenter {
-
-    private String code = "";
-    public RegisterPresenter(RegisterContact.View view) {
+public class ForgetPswPresenter extends BasePresenterImpl<ForgetPswContact.View> implements ForgetPswContact.Presenter {
+    public ForgetPswPresenter(ForgetPswContact.View view) {
         super(view);
     }
 
+    private String code = "";
 
     @Override
-    public void register() {
-        Log.d("bbbbb", "code-->" + code);
-        Log.d("bbbbb", "code-->" + view.getName());
-        Log.d("bbbbb", "code-->" + view.getPass());
-        Log.d("bbbbb", "code-->" + view.getPassagain());
-        Log.d("bbbbb", "code-->" + view.getCode());
+    public void reset() {
         if (TextUtils.isEmpty(view.getName())) {
             ToastUtils.showShortSafe("请输入用户名1");
             return;
@@ -53,7 +41,7 @@ public class RegisterPresenter extends BasePresenterImpl<RegisterContact.View> i
             ToastUtils.showShortSafe("请输入密码");
             return;
         }
-        if (view.getPass()==view.getPassagain()) {
+        if (view.getPass()!=view.getPassagain()) {
             ToastUtils.showShortSafe("两次密码不一致");
             return;
         }
@@ -63,7 +51,6 @@ public class RegisterPresenter extends BasePresenterImpl<RegisterContact.View> i
         }
         ToastUtils.showLongSafe(view.getName()+"——"+view.getPass()+"——"+view.getPassagain()+"——"+view.getCode());
         view.registerSuccess();
-
         /*
         else {
             RetroftUtils.getApi().create(Net.class).register(view.getName())
@@ -82,7 +69,6 @@ public class RegisterPresenter extends BasePresenterImpl<RegisterContact.View> i
 
         }*/
     }
-
     public void getCode() {
         if (TextUtils.isEmpty(view.getName()) || view.getName().length() != 11) {
             ToastUtils.showShortSafe(MyApp.getApplication().getResources().getString(R.string.tip_please_input_true_phone));
@@ -96,9 +82,7 @@ public class RegisterPresenter extends BasePresenterImpl<RegisterContact.View> i
     @SuppressLint("CheckResult")
     @Override
     public void verfi() {
-        if (!view.isChecked()) {
-            ToastUtils.showShortSafe(MyApp.getApplication().getResources().getString(R.string.tip_agree));
-        } else if (TextUtils.isEmpty(view.getName()) || view.getName().length() != 11) {
+        if (TextUtils.isEmpty(view.getName()) || view.getName().length() != 11) {
             ToastUtils.showShortSafe(MyApp.getApplication().getResources().getString(R.string.tip_please_input_true_phone));
         } else if (TextUtils.isEmpty(view.getCode())) {
             ToastUtils.showShortSafe(MyApp.getApplication().getResources().getString(R.string.tip_code_not_null));

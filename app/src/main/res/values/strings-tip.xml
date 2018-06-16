@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="tip_edit_success">修改成功</string>
+    <string name="tip_rejection_permission">您已拒绝此权限</string>
+    <string name="tip_reg_success">注册成功</string>
+    <string name="tip_please_input_true_phone">请输入正确的手机号码</string>
+    <string name="tip_psw_not_null">密码不能为空</string>
+    <string name="tip_agree">请先同意用户服务协议</string>
+    <string name="tip_code_not_null">验证码不能为空</string>
+    <string name="tip_code_error">验证码错误</string>
+    <string name="tip_psw_not_match">密码不一致</string>
+    <string name="tip_get_code_success">获取成功</string>
+    <string name="tip_bind_success">绑定成功</string>
+    <string name="tip_click_exit">再次点击返回键退出</string>
+    <string name="tip_device_num_not_null">设备编码不能为空</string>
+    <string name="tip_old_psw_not_null">旧密码不能为空</string>
+    <string name="tip_no_message">暂无消息</string>
+
+</resources>

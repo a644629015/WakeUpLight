@@ -3,23 +3,17 @@ package com.hj.wakeuplight.login.activity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.CountDownTimer;
 import android.os.Bundle;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.hj.wakeuplight.R;
-import com.hj.wakeuplight.login.contact.RegisterContact;
-import com.hj.wakeuplight.login.presenter.RegisterPresenter;
+import com.hj.wakeuplight.login.contact.ForgetPswContact;
+import com.hj.wakeuplight.login.presenter.ForgetPswPresenter;
 import com.hjtech.base.base.BaseActivity;
 import com.hjtech.base.utils.ToastUtils;
 
@@ -32,27 +26,25 @@ import com.hjtech.base.utils.ToastUtils;
  * 描述:     TODO
  */
 
-public class RegisterLoginActivity extends BaseActivity<RegisterContact.Presenter> implements RegisterContact.View {
-
+public class ForgetPswActivity extends BaseActivity<ForgetPswContact.Presenter> implements ForgetPswContact.View {
 
     private LinearLayout llyt_first, llyt_second;
-    private EditText reg_name;
-    private EditText reg_pass;
-    private EditText reg_passagain;
-    private EditText reg_code;
-    private Button next;
-    private ImageView back;
+    private EditText fgp_name;
+    private EditText fgp_pass;
+    private EditText fgp_passagain;
+    private EditText fgp_code;
+    private Button fgpbutton;
     private ImageView eyes;
     private ImageView againeyes;
     private TimeCount timeCount;
-    private Button regbutton;
     private Button getcode;
-    private CheckBox checkbox;
+    private Button next;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_forgetpsw);
         initViewAndEvent();
         showLlyt(0);
     }
@@ -61,19 +53,18 @@ public class RegisterLoginActivity extends BaseActivity<RegisterContact.Presente
     private void initViewAndEvent() {
         llyt_first =findViewById(R.id.llyt_first);
         llyt_second =findViewById(R.id.llyt_second);
-        reg_name = findViewById(R.id.reg_username);
-        reg_pass = findViewById(R.id.reg_password);
-        reg_passagain = findViewById(R.id.reg_passwordagain);
-        reg_code = findViewById(R.id.reg_code);
+        fgp_name = findViewById(R.id.fgp_username);
+        fgp_pass = findViewById(R.id.fgp_password);
+        fgp_passagain = findViewById(R.id.fgp_passwordagain);
+        fgp_code = findViewById(R.id.fgp_code);
         next=findViewById(R.id.next);
         back=findViewById(R.id.back);
         eyes=findViewById(R.id.pass_eyes);
         againeyes=findViewById(R.id.passagain_eyes);
-        regbutton=findViewById(R.id.reg_button);
+        fgpbutton=findViewById(R.id.fgp_button);
         getcode=findViewById(R.id.getcode);
-        checkbox=findViewById(R.id.reg_checkbox);
 
-        regbutton.setOnClickListener(clickListener);
+        fgpbutton.setOnClickListener(clickListener);
         getcode.setOnClickListener(clickListener);
         next.setOnClickListener(clickListener);
         back.setOnClickListener(clickListener);
@@ -86,8 +77,8 @@ public class RegisterLoginActivity extends BaseActivity<RegisterContact.Presente
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.reg_button:
-                    presenter.register();
+                case R.id.fgp_button:
+                    presenter.reset();
                     break;
                 case R.id.getcode:
                     presenter.getCode();
@@ -99,21 +90,22 @@ public class RegisterLoginActivity extends BaseActivity<RegisterContact.Presente
                     finish();
                     break;
                 case R.id.pass_eyes:
-                    presenter.chageEyes(eyes,reg_pass);
+                    presenter.chageEyes(eyes,fgp_pass);
                     break;
                 case R.id.passagain_eyes:
-                    presenter.chageEyes(againeyes,reg_passagain);
+                    presenter.chageEyes(againeyes,fgp_passagain);
                     break;
+
             }
         }
     };
 
     @Override
-    public RegisterContact.Presenter initPresenter() {
-        return new RegisterPresenter(this);
+    public ForgetPswContact.Presenter initPresenter() {
+        return new ForgetPswPresenter(this);
     }
     public static void obtain(Context context) {
-        Intent intent = new Intent(context, RegisterLoginActivity.class);
+        Intent intent = new Intent(context, ForgetPswActivity.class);
         context.startActivity(intent);
     }
     @Override
@@ -124,25 +116,10 @@ public class RegisterLoginActivity extends BaseActivity<RegisterContact.Presente
 
     @Override
     public void registerSuccess() {
-        ToastUtils.showShortSafe(getResources().getString(R.string.tip_reg_success));
+        ToastUtils.showShortSafe(getResources().getString(R.string.tip_edit_success));
         finish();
     }
-    @Override
-    public String getName() {
-        return reg_name.getText().toString().trim();
-    }
-    @Override
-    public String getPass() {
-        return reg_pass.getText().toString().trim();
-    }
-    @Override
-    public String getPassagain() {
-        return reg_passagain.getText().toString().trim();
-    }
-    @Override
-    public String getCode() {
-        return reg_code.getText().toString().trim();
-    }
+
     @Override
     public void showLlyt(int i) {
         switch (i) {
@@ -155,10 +132,6 @@ public class RegisterLoginActivity extends BaseActivity<RegisterContact.Presente
                 llyt_second.setVisibility(View.VISIBLE);
                 break;
         }
-    }
-    @Override
-    public boolean isChecked() {
-        return checkbox.isChecked();
     }
     private class TimeCount extends CountDownTimer {
 
@@ -175,5 +148,21 @@ public class RegisterLoginActivity extends BaseActivity<RegisterContact.Presente
             getcode.setText(millisUntilFinished / 1000 + "s");
             getcode.setEnabled(false);
         }
+    }
+    @Override
+    public String getName() {
+        return fgp_name.getText().toString().trim();
+    }
+    @Override
+    public String getPass() {
+        return fgp_pass.getText().toString().trim();
+    }
+    @Override
+    public String getPassagain() {
+        return fgp_passagain.getText().toString().trim();
+    }
+    @Override
+    public String getCode() {
+        return fgp_code.getText().toString().trim();
     }
 }
